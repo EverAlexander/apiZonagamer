@@ -9,7 +9,7 @@ class ModelProduct extends Model
     //
     protected $table = 'modelos';
     protected $primaryKey = 'id_modelo';
-    protected $fillable = ['id_modelo','nombre','modelo','marca'];
+    protected $fillable = ['id_modelo','nombre','descripcion','modelo','marca'];
 
     public function marcaInfo()
     {

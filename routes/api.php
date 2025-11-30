@@ -21,3 +21,5 @@ Route::get('brands/find/{id}',[BrandsController::class, 'find']);
 //Crud de modelo de producto
 Route::get('modelProduct/select',[ModelProductController::class, 'select']);
 Route::post('modelProduct/store',[ModelProductController::class, 'store']);
+Route::put('modelProduct/update/{id_marca}',[ModelProductController::class, 'update']);
+Route::delete('modelProduct/delete/{id}',[ModelProductController::class, 'delete']);
