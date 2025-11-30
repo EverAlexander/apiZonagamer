@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ModelProductController extends Controller
 {
@@ -41,6 +42,33 @@ class ModelProductController extends Controller
                 'data' => $modelos,
                 'total' => $modelos->count()
             ]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        //Validar los datos que sean requeridos
+        try {
+            //Log::info($request->all());
+            $validation = Validator::make($request->all(), [
+                'nombre' => 'required',
+                'modelo' => 'required',
+                'marca'  => 'required'
+            ]);
+            if ($validation->fails()) {
+                return response()->json([
+                    'code' => 400,
+                    'data' => $validation->messages()
+                ], 400);
+            } else {
+                $brands = ModelProduct::create($request->all());
+                return response()->json([
+                    'code' => 200,
+                    'data' => 'Producto Registrado'
+                ], 200);
+            }
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
