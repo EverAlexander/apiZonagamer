@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\GameConsoleController;
 use App\Http\Controllers\ModelProductController;
 use App\Models\ModelProduct;
 
@@ -23,3 +24,6 @@ Route::get('modelProduct/select',[ModelProductController::class, 'select']);
 Route::post('modelProduct/store',[ModelProductController::class, 'store']);
 Route::put('modelProduct/update/{id_marca}',[ModelProductController::class, 'update']);
 Route::delete('modelProduct/delete/{id}',[ModelProductController::class, 'delete']);
+
+//Crud de Consola de video juegos
+Route::get('Consola/select',[GameConsoleController::class, 'select']);

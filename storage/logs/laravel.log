@@ -1707,3 +1707,7 @@
 #38 C:\\Users\\Virov\\Documents\\Laravel\\apiZonagamer\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(23): require_once('C:\\\\Users\\\\Virov\\\\...')
 #39 {main}
 "} 
+[2025-12-01 16:15:00] local.ERROR: syntax error, unexpected token "<", expecting "function" or "const" {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): syntax error, unexpected token \"<\", expecting \"function\" or \"const\" at C:\\Users\\Virov\\Documents\\Laravel\\apiZonagamer\\app\\Models\\GameConsole.php:10)
+[stacktrace]
+#0 {main}
+"} 
