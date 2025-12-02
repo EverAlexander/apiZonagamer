@@ -189,4 +189,6 @@ class GameConsoleController extends Controller
             return response()->json($th->getMessage(), 500);
         }
     }
+
+    //AA
 }
