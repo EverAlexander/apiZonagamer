@@ -40,6 +40,8 @@ class GameConsoleController extends Controller
 
                     // Datos de relaciones
                     'modelo' => $item->versionInfo?->modelo ?? null,
+                    'modproducto' => $item->versionInfo?->nombre ?? null,
+                    'modDescrip' => $item->versionInfo?->descripcion ?? null,
                     'estado' => $item->estadoInfo?->nombre ?? null,
                     'ubicacion' => $item->ubicacionInfo?->nombre ?? null,
                 ];
