@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EstadoInventario;
 use App\Models\GameConsole;
+use App\Models\Ubicaciones;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class GameConsoleController extends Controller
@@ -47,6 +50,80 @@ class GameConsoleController extends Controller
                 'data' => $consolas,
                 'total' => $consolas->count()
             ]);
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    //Obtener ubicaciones
+    public function selectUbicacion()
+    {
+        try {
+            $ubicaciones = Ubicaciones::all();
+            if ($ubicaciones->count() > 0) {
+                return response()->json([
+                    'code' => 200,
+                    'data' => $ubicaciones
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 404,
+                    'data' => 'No hay ubicaciones registradas'
+                ], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    //Obtener estados
+    public function selectEstados()
+    {
+        try {
+            $estadosV = EstadoInventario::all();
+            if ($estadosV->count() > 0) {
+                return response()->json([
+                    'code' => 200,
+                    'data' => $estadosV
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 404,
+                    'data' => 'No hay estados registrados'
+                ], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        //Validar los datos que sean requeridos
+        try {
+            //Log::info($request->all());
+            $validation = Validator::make($request->all(), [
+                'numero_serie' => 'required',
+                'activofijo' => 'required',
+                'id_modelo' => 'required',
+                'color'  => 'required',
+                'observacion'  => 'required',
+                'id_estado'  => 'required',
+                'id_ubicacion'  => 'required',
+                
+            ]);
+            if ($validation->fails()) {
+                return response()->json([
+                    'code' => 400,
+                    'data' => $validation->messages()
+                ], 400);
+            } else {
+                $modelo = GameConsole::create($request->all());
+                return response()->json([
+                    'code' => 200,
+                    'data' => 'Consola Registrada'
+                ], 200);
+            }
         } catch (\Throwable $th) {
             return response()->json($th->getMessage(), 500);
         }
