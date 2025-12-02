@@ -28,6 +28,8 @@ Route::delete('modelProduct/delete/{id}',[ModelProductController::class, 'delete
 //Crud de Consola de video juegos
 Route::get('Consola/select',[GameConsoleController::class, 'select']);
 Route::post('Consola/store',[GameConsoleController::class, 'store']);
+Route::put('Consola/update/{id_marca}',[GameConsoleController::class, 'update']);
+Route::delete('Consola/delete/{id}',[GameConsoleController::class, 'delete']);
 
 
 //Obtener datos de ubicacion y estados

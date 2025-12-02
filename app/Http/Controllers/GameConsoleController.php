@@ -128,4 +128,63 @@ class GameConsoleController extends Controller
             return response()->json($th->getMessage(), 500);
         }
     }
+
+    public function update(Request $request, $serie)
+    {
+        //Validar los datos que sean requeridos
+        try {
+            $validation = Validator::make($request->all(), [
+                'numero_serie' => 'required',
+                'activofijo' => 'required',
+                'id_modelo' => 'required',
+                'color'  => 'required',
+                'observacion'  => 'required',
+                'id_estado'  => 'required',
+                'id_ubicacion'  => 'required',
+            ]);
+            if ($validation->fails()) {
+                return response()->json([
+                    'code' => 400,
+                    'data' => $validation->messages()
+                ], 400);
+            } else {
+                $consola = GameConsole::find($serie);
+                if ($consola) {
+                    $consola->update($request->all());
+                    return response()->json([
+                        'code' => 200,
+                        'data' => 'Consola Actualizada'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'code' => 404,
+                        'data' => 'No se encontro la consola'
+                    ], 404);
+                }
+            }
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $consola = GameConsole::find($id);
+            if ($consola) {
+                $consola->delete($id);
+                return response()->json([
+                    'code' => 200,
+                    'data' => 'Consola eliminada'
+                ], 200);
+            } else {
+                return response()->json([
+                    'code' => 404,
+                    'data' => 'Consola no encontrado'
+                ], 404);
+            }
+        } catch (\Throwable $th) {
+            return response()->json($th->getMessage(), 500);
+        }
+    }
 }
