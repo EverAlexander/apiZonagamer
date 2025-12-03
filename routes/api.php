@@ -4,6 +4,7 @@ use App\Http\Controllers\BrandsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ControlsController;
 use App\Http\Controllers\GameConsoleController;
 use App\Http\Controllers\ModelProductController;
 use App\Models\ModelProduct;
@@ -31,7 +32,17 @@ Route::post('Consola/store',[GameConsoleController::class, 'store']);
 Route::put('Consola/update/{id_marca}',[GameConsoleController::class, 'update']);
 Route::delete('Consola/delete/{id}',[GameConsoleController::class, 'delete']);
 
+//Crud de Controles de consolas
+Route::get('controles/select',[ControlsController::class, 'select']);
+Route::post('controles/store',[ControlsController::class, 'store']);
+Route::put('controles/update/{id_marca}',[ControlsController::class, 'update']);
+Route::delete('controles/delete/{id}',[ControlsController::class, 'delete']);
+
+
 
 //Obtener datos de ubicacion y estados
 Route::get('Consola/selectUbicacion',[GameConsoleController::class, 'selectUbicacion']);
 Route::get('Consola/selectEstados',[GameConsoleController::class, 'selectEstados']);
+
+Route::get('controles/selectUbication',[ControlsController::class, 'selectUbication']);
+Route::get('controles/selectEstados',[ControlsController::class, 'selectEstados']);
